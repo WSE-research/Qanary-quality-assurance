@@ -1,0 +1,146 @@
+[
+    {
+        "question": "What is the real name of Batman?",
+        "graph": "urn:graph:0ef27905-56d7-4e62-95da-edff5400eb1e",
+        "results": [
+            {
+                "0_was-any-instance-identified.sparql": true
+            },
+            {
+                "1_was-the-expected-instace-recognized.sparql": true
+            },
+            {
+                "2_was-a-sparql-query-computed-similar-as-expected.sparql": true
+            },
+            {
+                "custom_evaluation": true
+            }
+        ]
+    },
+    {
+        "question": "What is the real name of Superman?",
+        "graph": "urn:graph:946b9a69-c842-4f5a-9f94-5faddd2a3289",
+        "results": [
+            {
+                "0_was-any-instance-identified.sparql": true
+            },
+            {
+                "1_was-the-expected-instace-recognized.sparql": true
+            },
+            {
+                "2_was-a-sparql-query-computed-similar-as-expected.sparql": true
+            },
+            {
+                "custom_evaluation": false
+            }
+        ]
+    },
+    {
+        "question": "What is the real name of Hulk?",
+        "graph": "urn:graph:05ec4c56-4c60-4ed8-b4b8-c353b54d92e8",
+        "results": [
+            {
+                "0_was-any-instance-identified.sparql": true
+            },
+            {
+                "1_was-the-expected-instace-recognized.sparql": false
+            },
+            {
+                "2_was-a-sparql-query-computed-similar-as-expected.sparql": false
+            },
+            {
+                "custom_evaluation": false
+            }
+        ]
+    },
+    {
+        "question": "What is the real name of Ironman?",
+        "graph": "urn:graph:d021e25a-7398-455e-bdbc-c3491bc980b6",
+        "results": [
+            {
+                "0_was-any-instance-identified.sparql": true
+            },
+            {
+                "1_was-the-expected-instace-recognized.sparql": false
+            },
+            {
+                "2_was-a-sparql-query-computed-similar-as-expected.sparql": false
+            },
+            {
+                "custom_evaluation": false
+            }
+        ]
+    },
+    {
+        "question": "What is the real name of Antman?",
+        "graph": "urn:graph:afccd292-34cf-4e58-82b7-915bdffd0615",
+        "results": [
+            {
+                "0_was-any-instance-identified.sparql": true
+            },
+            {
+                "1_was-the-expected-instace-recognized.sparql": false
+            },
+            {
+                "2_was-a-sparql-query-computed-similar-as-expected.sparql": false
+            },
+            {
+                "custom_evaluation": false
+            }
+        ]
+    },
+    {
+        "question": "What is the real name of Captain America?",
+        "graph": "urn:graph:6afb6f00-7864-4b0c-a84d-ce11cd2b9b71",
+        "results": [
+            {
+                "0_was-any-instance-identified.sparql": true
+            },
+            {
+                "1_was-the-expected-instace-recognized.sparql": true
+            },
+            {
+                "2_was-a-sparql-query-computed-similar-as-expected.sparql": true
+            },
+            {
+                "custom_evaluation": true
+            }
+        ]
+    },
+    {
+        "question": "What is the real name of Spider Man?",
+        "graph": "urn:graph:a3be4545-ac53-4960-8167-8e09198776b2",
+        "results": [
+            {
+                "0_was-any-instance-identified.sparql": true
+            },
+            {
+                "1_was-the-expected-instace-recognized.sparql": true
+            },
+            {
+                "2_was-a-sparql-query-computed-similar-as-expected.sparql": true
+            },
+            {
+                "custom_evaluation": true
+            }
+        ]
+    },
+    {
+        "question": "What is the real name of Wolverine?",
+        "graph": "urn:graph:6a1b8f5b-12b3-4ffb-807d-a5072318f344",
+        "results": [
+            {
+                "0_was-any-instance-identified.sparql": true
+            },
+            {
+                "1_was-the-expected-instace-recognized.sparql": true
+            },
+            {
+                "2_was-a-sparql-query-computed-similar-as-expected.sparql": true
+            },
+            {
+                "custom_evaluation": true
+            }
+        ]
+    }
+]

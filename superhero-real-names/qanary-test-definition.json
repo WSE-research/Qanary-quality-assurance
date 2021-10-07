@@ -1,0 +1,68 @@
+{
+    "qanary": {
+        "system_url": "http://webengineering.ins.hs-anhalt.de:43740/startquestionansweringwithtextquestion",
+        "componentlist": [
+            "NED-DBpediaSpotlight",
+            "QueryBuilderSimpleRealNameOfSuperHero"
+        ],
+        "qanary_triplestore_endpoint": "http://webengineering.ins.hs-anhalt.de:40158",
+        "qanary_triplestore_database": "qanary",
+        "qanary_triplestore_username": "admin",
+        "qanary_triplestore_password": "admin"
+    },
+    "validation-sparql-templates": [
+        "0_was-any-instance-identified.sparql",
+        "1_was-the-expected-instace-recognized.sparql",
+        "2_was-a-sparql-query-computed-similar-as-expected.sparql"
+    ],
+    "custom-validation": "execute-on-dbpedia",
+    "tests": [{
+            "question": "What is the real name of Batman?",
+            "replacements": {
+                "DBPEDIAENTITY": "http://dbpedia.org/resource/Batman"
+            }
+        },
+        {
+            "question": "What is the real name of Superman?",
+            "replacements": {
+                "DBPEDIAENTITY": "http://dbpedia.org/resource/Superman"
+            }
+        },
+        {
+            "question": "What is the real name of Hulk?",
+            "replacements": {
+                "DBPEDIAENTITY": "http://dbpedia.org/resource/Hulk_(comics)"
+            }
+        },
+        {
+            "question": "What is the real name of Ironman?",
+            "replacements": {
+                "DBPEDIAENTITY": "http://dbpedia.org/resource/Iron_Man"
+            }
+        },
+        {
+            "question": "What is the real name of Antman?",
+            "replacements": {
+                "DBPEDIAENTITY": "http://dbpedia.org/resource/Ant-Man"
+            }
+        },
+        {
+            "question": "What is the real name of Captain America?",
+            "replacements": {
+                "DBPEDIAENTITY": "http://dbpedia.org/resource/Captain_America"
+            }
+        },
+        {
+            "question": "What is the real name of Spider Man?",
+            "replacements": {
+                "DBPEDIAENTITY": "http://dbpedia.org/resource/Spider-Man"
+            }
+        },
+        {
+            "question": "What is the real name of Wolverine?",
+            "replacements": {
+                "DBPEDIAENTITY": "http://dbpedia.org/resource/Wolverine_(character)"
+            }
+        }
+    ]
+}
