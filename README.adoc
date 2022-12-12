@@ -12,7 +12,7 @@ endif::[]
 
 # Qanary Quality Assurance (beta)
 
-toc:[]
+toc::[]
 
 This project provides a helper for evaluating your https://github.com/WDAqua/Qanary[Qanary]-based Question Answering system. 
 In general, it is providing you a framework for controlling the quality of a QA system. The script can be fully customized to meet the requirements of your QA system.
