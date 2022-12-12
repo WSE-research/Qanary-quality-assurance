@@ -110,7 +110,7 @@ Any string can be a placeholder, therefore, choose a unique string to prevent pr
 A default replacement key is defined: `<GRAPHID>`. 
 It is used to inject the name of the current graph in your query template.
 
-See the section [Step 3. Create ASK query template files](#step-3-create-ask-query-template-files) for ASK queries.
+See the section link:#step-3-create-ask-query-template-files[Step 3. Create ASK query template files] for ASK queries.
 
 ##### Section `custom-validation`
 
