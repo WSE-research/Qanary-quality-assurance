@@ -12,10 +12,11 @@ endif::[]
 
 # Qanary Quality Assurance (beta)
 
-toc::[]
-
 This project provides a helper for evaluating your https://github.com/WDAqua/Qanary[Qanary]-based Question Answering system. 
-In general, it is providing you a framework for controlling the quality of a QA system. The script can be fully customized to meet the requirements of your QA system.
+In general, it is providing a framework for controlling the quality of the QA system's components. 
+The script can be fully customized to check the data flow requirements of your QA system.
+
+toc::[]
 
 ## Motivation: End-to-end Microbenchmarking
 
