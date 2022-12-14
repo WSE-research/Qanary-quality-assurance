@@ -188,4 +188,4 @@ The script is evaluating one scenario only (e.g., one type of questions).
 Typically, in a project there will be many scenarios. 
 In this case, just define several directories containing particular definitions for an additional scenario.
 
-**Feel free to ork and modify the script to meet your requirements.**
+**Feel free to fork and modify the script to meet your requirements.**
