@@ -82,11 +82,7 @@ The structure of the file is as follows:
 {
     "qanary": {
         "system_url": "...",
-        "componentlist": [ ... ],
-        "qanary_triplestore_endpoint": "...",
-        "qanary_triplestore_database": "...",
-        "qanary_triplestore_username": "...",
-        "qanary_triplestore_password": "..."
+        "componentlist": [ ... ]
     },
     "validation-sparql-templates": [ ... ],
     "custom-validation": "...",
@@ -187,8 +183,9 @@ See the folder link:superhero-real-names/[superhero-real-names] for a complete e
 ## Limitations
 
 The script is currently designed for textual questions only. 
-Feel free to modify the script to meet your requirements.
 
 The script is evaluating one scenario only (e.g., one type of questions). 
 Typically, in a project there will be many scenarios. 
 In this case, just define several directories containing particular definitions for an additional scenario.
+
+**Feel free to ork and modify the script to meet your requirements.**

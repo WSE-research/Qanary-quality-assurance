@@ -15,6 +15,12 @@ def validate(test, logger, conf_qanary, connection, graphid):
 
     # first get the created SPARQL query from the Qanary triplestore
     query_for_computed_answer = """
+        PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+        PREFIX oa: <http://www.w3.org/ns/openannotation/core/>
+        PREFIX qa: <http://www.wdaqua.eu/qa#>
+        PREFIX dbr: <http://dbpedia.org/resource/>
+        PREFIX xmls: <http://www.w3.org/2001/XMLSchema#>
+    
         SELECT ?%s
         FROM <%s>
         WHERE {
@@ -23,7 +29,10 @@ def validate(test, logger, conf_qanary, connection, graphid):
         }
     """ % (field_name, graphid)
     logger.info("query_for_computed_answer: %s" % (query_for_computed_answer,))
-    result = connection.select(query_for_computed_answer)
+    #result = connection.select(query_for_computed_answer)
+    connection.setQuery(query_for_computed_answer)
+    connection.setReturnFormat(JSON)
+    result = connection.query().convert()
     result_rows = result.get("results").get("bindings")
 
     # if more than 1 answer query was created, then it is considered to be wrong

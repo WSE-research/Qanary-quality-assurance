@@ -1,14 +1,10 @@
 {
     "qanary": {
-        "system_url": "http://webengineering.ins.hs-anhalt.de:43740/startquestionansweringwithtextquestion",
+        "system_url": "INSERT-YOUR-QANARY-SYSTEM-URL-HERE/startquestionansweringwithtextquestion",
         "componentlist": [
             "NED-DBpediaSpotlight",
-            "QueryBuilderSimpleRealNameOfSuperHero"
-        ],
-        "qanary_triplestore_endpoint": "http://webengineering.ins.hs-anhalt.de:40158",
-        "qanary_triplestore_database": "qanary",
-        "qanary_triplestore_username": "admin",
-        "qanary_triplestore_password": "admin"
+            "QB-SimpleRealNameOfSuperHero"
+        ]
     },
     "validation-sparql-templates": [
         "0_was-any-instance-identified.sparql",

@@ -1,4 +1,3 @@
-pystardog
 pandas
 SPARQLWrapper
 argparse
