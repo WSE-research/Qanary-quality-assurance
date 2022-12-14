@@ -20,7 +20,7 @@ custom_configuration_file_name = "qanary-test-definition.custom.json" # custom c
 
 
 logging.basicConfig()
-logging.getLogger().setLevel(logging.INFO)
+logging.getLogger().setLevel(logging.WARNING)
 
 def connect_to_triplestore(conf_qanary, endpoint):
     """
@@ -112,8 +112,8 @@ def sparql_execute_query(logger, question, configuration_directory, sparql_templ
         
         logging.debug(result)
         
-        logger.info("%s\t%s\t%s" %
-                    (question, sparql_template_filename, result))
+        logger.info(f"{question}\t{sparql_template_filename}\t{result}")
+        
         return result
     except Exception as e:
         message = "query could not be executed: %s\n%s" % (
@@ -206,6 +206,7 @@ def evaluate_test(logger, conf_qanary, configuration_directory, test, validation
     """
     result = sparql_execute_query(
         logger, test, configuration_directory, validation_sparql_template, connection, graphid)
+    result = result.get("boolean")
     logger.info("question: %s, result: %s, sparql: %s" %
                 (test.get("question"), result, validation_sparql_template))
     return result
