@@ -174,9 +174,7 @@ It will contain the output files:
 
 * The *logfile* contains a log of the actions during the tests.
 * The *JSON file* contain the complete test results in JSON format.
-* The *XLSX file* contains a tabular representation of the test results and an automatically created chart showing the quality visually. Example:  
-  ![table](./superhero-real-names/example-output/table.png)  
-  ![chart](./superhero-real-names/example-output/chart.png)
+* The *XLSX file* contains a tabular representation of the test results and an automatically created chart showing the quality visually. Example: image:./superhero-real-names/example-output/table.png[] image:./superhero-real-names/example-output/chart.png[]
 
 Every file name contain the timestamp (datetime when the test was started). If the test is executed several times, then the files are not overwritten.
 
