@@ -11,5 +11,5 @@ WHERE {
     ?annotationId oa:hasBody ?createdAnswerQuery.
     FILTER(REGEX(?createdAnswerQuery, "SELECT", "i"))
     FILTER(CONTAINS(?createdAnswerQuery, "DBPEDIAENTITY"))
-    FILTER(CONTAINS(?createdAnswerQuery, "dbr:Category:Superhero_film_characters"))
+    FILTER(CONTAINS(?createdAnswerQuery, "dbr:Category:Superheroes_with_alter_egos"))
 }
