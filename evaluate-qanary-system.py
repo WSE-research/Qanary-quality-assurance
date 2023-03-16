@@ -80,30 +80,32 @@ def request_qanary_endpoint_for_question(logger, conf_qanary, question):
     Returns:
         [type]: [description]
     """
+    additionalTriples = conf_qanary.get("additionalTriples") if conf_qanary.get("additionalTriples") is not None else "[]"
     data = {
         "question": question,
-        "componentlist[]": conf_qanary.get("componentlist")
+        "componentlist": conf_qanary.get("componentlist"),
+        "additionalTriples": additionalTriples
     }
     url = conf_qanary.get("system_url")
-    logger.info("request parameter for Qanary system:\n" +
+    logger.debug("request parameter for Qanary system:\n" +
                 pprint.pformat(data))
-    my_response = requests.post(url, data=data)
-    logger.info("request as curl:\n" + curlify.to_curl(my_response.request))
+    my_response = requests.post(url, json=data)
+    logger.debug("request as curl:\n" + curlify.to_curl(my_response.request))
 
     print(f"HTTP response code: {my_response.status_code}")
-    logger.info("response of Qanary system:\n" +
+    logger.debug("response of Qanary system:\n" +
                 pprint.pformat(my_response.json()))
 
     return my_response.json()
 
 
 def sparql_execute_query(logger, question, configuration_directory, sparql_template_filename, connection, graphid):
-    logger.warning(f"using question: {question}")
-    logger.warning(f"using graph id: {graphid}")
+    logger.debug(f"using question: {question}")
+    logger.debug(f"using graph id: {graphid}")
     replacements = question.get("replacements")
     sparql_query_complete = prepare_sparql_query(
         logger, configuration_directory + "/" + sparql_template_filename, replacements, graphid)
-    logger.info(sparql_query_complete)
+    logger.debug(sparql_query_complete)
     try:
         logging.debug(sparql_query_complete)
         connection.setQuery(sparql_query_complete)
@@ -112,7 +114,7 @@ def sparql_execute_query(logger, question, configuration_directory, sparql_templ
         
         logging.debug(result)
         
-        logger.info(f"{question}\t{sparql_template_filename}\t{result}")
+        logger.debug(f"{question}\t{sparql_template_filename}\t{result}")
         
         return result
     except Exception as e:
@@ -139,14 +141,16 @@ def evaluate_tests(logger, conf_qanary, configuration_directory, validation_spar
 
     for nr, test in enumerate(tests):
         question = test.get("question")
-        logger.info("%d. test: %s" % (nr, pprint.pformat(test)))
+        logger.debug("%d. test: %s" % (nr, pprint.pformat(test)))
+        logger.info("\n")
+        logger.info("%d. test: %s" % (nr, pprint.pformat(question)))
         print("\n%d. test: %s" % (nr, question))
 
         qanary_response = request_qanary_endpoint_for_question(
             logger, conf_qanary, question)
         
-        logger.info("qanary_response:")
-        logger.info(qanary_response)
+        logger.debug("qanary_response:")
+        logger.debug(qanary_response)
 
         graphid = qanary_response.get("outGraph")
         endpoint = qanary_response.get("endpoint")
@@ -184,7 +188,7 @@ def evaluate_tests(logger, conf_qanary, configuration_directory, validation_spar
             "results": result_per_test
         })  # TODO: create result object
 
-    logger.info("\n----------------------------------------\nComplete results:\n%s" %
+    logger.debug("\n----------------------------------------\nComplete results:\n%s" %
                 (pprint.pformat(results)))
 
     return results
@@ -207,7 +211,7 @@ def evaluate_test(logger, conf_qanary, configuration_directory, test, validation
     result = sparql_execute_query(
         logger, test, configuration_directory, validation_sparql_template, connection, graphid)
     result = result.get("boolean")
-    logger.info("question: %s, result: %s, sparql: %s" %
+    logger.debug("question: %s, result: %s, sparql: %s" %
                 (test.get("question"), result, validation_sparql_template))
     return result
 
@@ -411,7 +415,7 @@ def determine_if_custom_module_is_callable(logger, custom_module):
 
     try:
         custom_module.validate  # no call, just checking the name, TODO: improve
-        logger.info("Method '%s' found in module '%s'." %
+        logger.debug("Method '%s' found in module '%s'." %
                     (method_name, custom_module.__name__))
     except Exception as e:
         logger.error("Method '%s' NOT found in module '%s'." %
@@ -419,7 +423,7 @@ def determine_if_custom_module_is_callable(logger, custom_module):
         raise RuntimeError("Your custom module '%s' needs to contain a method '%s' " % (
             custom_module.__name__, method_name))
 
-    if len(inspect.getargspec(custom_module.validate).args) != 5:
+    if len(inspect.getfullargspec(custom_module.validate).args) != 5:
         message = "Method '%s' in module '%s' has to contain 5 parameters (typically: 'test', 'logger', 'conf_qanary', 'connection', 'graphid')." % (
             method_name, custom_module.__name__)
         logger.error(message)
@@ -472,8 +476,8 @@ def main(logger, sheet_name, configuration_directory, outdir, filename_prefix):
            custom_modul_name,
            len(conf_tests), create_printable_string(conf_tests)
            )
-    print(message)
-    logger.info(message)
+    #print(message)
+    logger.debug(message)
 
     # import the custom module if defined else use predefined dummy module
     if custom_modul_name != None:
@@ -504,6 +508,8 @@ if __name__ == "__main__":
         description='The application executes the tests for your Qanary-based Question Answering system and is creating an XLSX and JSON output into the folder "output".')
     parser.add_argument('-d', '--directory', action='store', default=None,
                         help='required parameter: directory name where the test configuration is available')
+    parser.add_argument('-l', '--log', action='store', default='INFO',
+                        help='optional parameter: log level for the console output (default: INFO), possible values: DEBUG, INFO, WARNING, ERROR, CRITICAL')
     args = parser.parse_args()
 
     if args.directory == None:
@@ -522,7 +528,7 @@ if __name__ == "__main__":
     my_logger = logging.getLogger('qanary-evaluator')
     formatter = logging.Formatter(
         '%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-    my_logger.setLevel(logging.INFO)
+    my_logger.setLevel(args.log.upper())
     fh = logging.FileHandler('%s.log' % (filename_prefix,))
     fh.setFormatter(formatter)
     fh.setLevel(logging.DEBUG)
