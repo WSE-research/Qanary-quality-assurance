@@ -1,0 +1,6 @@
+[run]
+source = .
+omit =
+    tests/*
+    conftest.py
+    superhero-real-names/*
