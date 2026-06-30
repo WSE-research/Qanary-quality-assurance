@@ -1,7 +1,5 @@
 import json
 import logging
-import sys
-from requests.models import Response
 import pprint
 import requests
 import pandas as pd
@@ -11,7 +9,7 @@ import argparse
 import importlib
 import inspect
 import curlify  # pip3 install curlify
-from SPARQLWrapper import SPARQLWrapper, JSON, POST
+from SPARQLWrapper import SPARQLWrapper, JSON
 
 sheet_name = "QanarySystemQualityControl"
 outdir = "output"
@@ -387,7 +385,7 @@ def export_to_excel(logger, test_results, filename_prefix, sheet_name):
     worksheet.write(number_of_questions+1, 0, "average:", avg_format)
 
     # Close the Pandas Excel writer and output the Excel file.
-    writer.save()
+    writer.close()
     print("EXCEL file written to '%s'." % (xlsx_filename,))
 
 
@@ -413,13 +411,13 @@ def determine_if_custom_module_is_callable(logger, custom_module):
         custom_module.validate  # no call, just checking the name, TODO: improve
         logger.info("Method '%s' found in module '%s'." %
                     (method_name, custom_module.__name__))
-    except Exception as e:
+    except Exception:
         logger.error("Method '%s' NOT found in module '%s'." %
                      (method_name, custom_module.__name__))
         raise RuntimeError("Your custom module '%s' needs to contain a method '%s' " % (
             custom_module.__name__, method_name))
 
-    if len(inspect.getargspec(custom_module.validate).args) != 5:
+    if len(inspect.getfullargspec(custom_module.validate).args) != 5:
         message = "Method '%s' in module '%s' has to contain 5 parameters (typically: 'test', 'logger', 'conf_qanary', 'connection', 'graphid')." % (
             method_name, custom_module.__name__)
         logger.error(message)
@@ -476,7 +474,7 @@ def main(logger, sheet_name, configuration_directory, outdir, filename_prefix):
     logger.info(message)
 
     # import the custom module if defined else use predefined dummy module
-    if custom_modul_name != None:
+    if custom_modul_name is not None:
         custom_module = importlib.import_module(
             configuration_directory + "." + custom_modul_name)
     else:
@@ -506,7 +504,7 @@ if __name__ == "__main__":
                         help='required parameter: directory name where the test configuration is available')
     args = parser.parse_args()
 
-    if args.directory == None:
+    if args.directory is None:
         parser.print_help()
         raise RuntimeError("Directory not provided.")
     elif not os.path.isdir(args.directory):
