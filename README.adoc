@@ -92,7 +92,11 @@ The structure of the file is as follows:
 
 ##### Section `qanary`
 
-The `qanary` section configures the connection data to the Qanary system (see [example](superhero-real-names/qanary-test-definition.json)).
+The `qanary` section configures the connection data to the Qanary system (see link:./superhero-real-names/qanary-test-definition.json[example]):
+
+* `system_url`: the URL of the Qanary system (e.g. `http://localhost:8080/startquestionansweringwithtextquestion`)
+* `componentlist`: a list of components that are used in the QA system (e.g. `["NED-DBpediaSpotlight", "QB-SimpleRealNameOfSuperHero"]`)
+* `additionalTriples`: a list of triples that will be seeded before the question is answered
 
 ##### Section `validation-sparql-templates`
 
@@ -162,6 +166,19 @@ For each test template defined in the section `validation-sparql-templates` a fi
 
 For details on ASK queries see https://www.futurelearn.com/info/courses/linked-data/0/steps/16094 or https://codyburleson.com/blog/sparql-examples-ask.
 For examples of a real test configuration see link:superhero-real-names/0_was-any-instance-identified.sparql[here], link:superhero-real-names/1_was-the-expected-instace-recognized.sparql[here] and link:superhero-real-names/2_was-a-sparql-query-computed-similar-as-expected.sparql[here].
+
+## Execution
+
+The script can be executed as follows:
+
+[source,bash]
+python3 evaluate-qanary-system.py --directory=<DIRECTORY> [--log=<LOGLEVEL>]
+
+### Parameters
+
+* `--directory=<DIRECTORY>`: the directory containing the test definition file (see above)
+
+* `--log=<LOGLEVEL>`: the log level (default: `INFO`), possible values: `DEBUG`, `INFO`, `WARNING`, `ERROR`, `CRITICAL`
 
 ## Evaluation
 
